@@ -1,0 +1,20 @@
+micronaut:
+  application:
+    name: micronaut-inaction
+  server:
+    port: -1
+  executors:
+    io:
+      type: fixed
+      nThreads: 75
+  netty:
+    event-loops:
+      other:
+        num-threads: 10
+apiTvs:
+  account:
+    limits:
+      url: http://localhost:8080/account
+
+
+

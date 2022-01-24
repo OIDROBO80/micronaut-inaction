@@ -1,0 +1,1295 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "customerAccountProductsManagement",
+    "version": "1.2.0",
+    "description": "Api que permite el manejo cuentas de un cliente"
+  },
+  "servers": [
+    {
+      "url": "https://api.labdigitalbdbtvsqa.com/{basePath}",
+      "variables": {
+        "basePath": {
+          "default": "customer-accounts-management"
+        }
+      }
+    },
+    {
+      "url": "https://api.labdigitalbdbtvsstg.com/{basePath}",
+      "variables": {
+        "basePath": {
+          "default": "customer-accounts-management"
+        }
+      }
+    },
+    {
+      "url": "https://api.labdigitalbdbtvs.com/{basePath}",
+      "variables": {
+        "basePath": {
+          "default": "customer-accounts-management"
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "Account Status",
+      "description": "Gestión de estado de una cuenta"
+    },
+    {
+      "name": "Account Limits",
+      "description": "Administración de Topes - AccountLimitsTransactionManagement"
+    }
+  ],
+  "paths": {
+    "/V1/enterprise/customer/product/modify-status": {
+      "put": {
+        "tags": [
+          "Account Status"
+        ],
+        "requestBody": {
+          "description": "Informacion del producto para cambiar el estado de una cuenta",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountActivation"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MsgRsDefaultDef"
+                },
+                "examples": {
+                  "MessageDefaultDefExample": {
+                    "value": {
+                      "Status": {
+                        "StatusCode": 200,
+                        "ServerStatusCode": "OK",
+                        "Severity": "Info",
+                        "StatusDesc": "El cambio de estado del producto se realizó con éxito."
+                      },
+                      "EndDt": "2018-02-10T09:30Z"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Esta respuesta se presenta al hacer un cambio de estado al producto"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MsgRsDefaultDef"
+                },
+                "examples": {
+                  "MsgRsErrorDefExample": {
+                    "value": {
+                      "Status": {
+                        "ServerStatusCode": "400",
+                        "Severity": "Error",
+                        "StatusCode": 400,
+                        "StatusDesc": "Problems Status 400"
+                      },
+                      "EndDt": "2018-02-10T09:30Z"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Esta respuesta se presenta en caso de que alguno de los parámetros enviados no corresponda con los parámetros esperados"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MsgRsDefaultDef"
+                }
+              }
+            },
+            "description": "api key invalido o ip no registrada"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MsgRsDefaultDef"
+                }
+              }
+            },
+            "description": "La cuenta cuenta no existe"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MsgRsDefaultDef"
+                },
+                "examples": {
+                  "MsgRsErrorDefExample": {
+                    "value": {
+                      "Status": {
+                        "ServerStatusCode": "500",
+                        "Severity": "Error",
+                        "StatusCode": 500,
+                        "StatusDesc": "Problems Status 500"
+                      },
+                      "EndDt": "2018-02-10T09:30Z"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Esta respuesta se presenta en caso de ocurrir un error inesperado en la aplicación"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MsgRsDefaultDef"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "operationId": "ProductStatusMod",
+        "summary": "Recurso que permite cambiar el estado de un producto",
+        "description": "Recurso que permite cambiar el estado de un producto ",
+        "x-amazon-apigateway-integration": {
+          "uri": "${account_products_lbda_uri}",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "parameters": [
+        {
+          "name": "X-RqUID",
+          "description": "Identificador único del mensaje",
+          "schema": {
+            "format": "uuid",
+            "maxLength": 36,
+            "minLength": 1,
+            "pattern": "^(?!.*<[^>]+>).*",
+            "type": "string"
+          },
+          "in": "header",
+          "required": true
+        },
+        {
+          "name": "X-CompanyId",
+          "description": "Código de empresa que realiza la invocación",
+          "schema": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^(?!.*<[^>]+>).*",
+            "type": "string"
+          },
+          "in": "header",
+          "required": true
+        },
+        {
+          "name": "X-Name",
+          "description": "Nombre de la aplicación que consume la API",
+          "schema": {
+            "enum": [
+              "LibreDestino",
+              "TarjetaDeCredito",
+              "CuentaDeAhorros",
+              "Libranzas",
+              "Vivienda",
+              "Crediservice",
+              "ADN",
+              "CDT",
+              "Vehiculos",
+              "Microfinanzas",
+              "Omnicanalidad"
+            ],
+            "type": "string"
+          },
+          "in": "header",
+          "required": true
+        },
+        {
+          "name": "X-Channel",
+          "description": "Canal origen de consumo de la transacción",
+          "schema": {
+            "enum": [
+              "Web",
+              "Banca Movil",
+              "Banca Virtual",
+              "Aliado",
+              "FuerzaMovil",
+              "Oficina",
+              "Microfinanzas",
+              "PSE",
+              "BdB Empresas"
+            ],
+            "type": "string"
+          },
+          "in": "header",
+          "required": true,
+          "examples": {
+            "XChannelExample": {
+              "value": "Oficina"
+            }
+          }
+        },
+        {
+          "name": "X-IPAddr",
+          "description": "IP origen de la invocación",
+          "schema": {
+            "maxLength": 16,
+            "minLength": 0,
+            "pattern": "^(?!.*<[^>]+>).*",
+            "type": "string"
+          },
+          "in": "header",
+          "required": true
+        },
+        {
+          "name": "X-GovIssueIdentType",
+          "description": "Tipo de documento",
+          "schema": {
+            "enum": [
+              "CC",
+              "CE",
+              "LC",
+              "NI",
+              "OT",
+              "PA",
+              "RC",
+              "TI"
+            ],
+            "type": "string"
+          },
+          "in": "header",
+          "required": true
+        },
+        {
+          "name": "X-IdentSerialNum",
+          "description": "Numero del documento",
+          "schema": {
+            "maxLength": 25,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9]*$",
+            "type": "string"
+          },
+          "in": "header",
+          "required": true
+        }
+      ]
+    },
+    "/V1/enterprise/customer/account/{AcctType}/{AcctId}/limits": {
+      "put": {
+        "tags": [
+          "Account Limits"
+        ],
+        "requestBody": {
+          "description": "Actualizar topes a una cuenta",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcctLimitsCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "La operación se realiza correctamente."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MsgRsDefaultDef"
+                },
+                "examples": {
+                  "MsgRsErrorDefExample": {
+                    "value": {
+                      "Status": {
+                        "ServerStatusCode": "400",
+                        "Severity": "Error",
+                        "StatusCode": 400,
+                        "StatusDesc": "Problems Status 400"
+                      },
+                      "EndDt": "2018-02-10T09:30Z"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Esta respuesta se presenta en caso de que alguno de los parámetros enviados no corresponda con los parámetros esperados"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MsgRsDefaultDef"
+                }
+              }
+            },
+            "description": "api key invalido o ip no registrada"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MsgRsDefaultDef"
+                }
+              }
+            },
+            "description": "La cuenta cuenta no existe"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MsgRsDefaultDef"
+                },
+                "examples": {
+                  "MsgRsErrorDefExample": {
+                    "value": {
+                      "Status": {
+                        "ServerStatusCode": "500",
+                        "Severity": "Error",
+                        "StatusCode": 500,
+                        "StatusDesc": "Problems Status 500"
+                      },
+                      "EndDt": "2018-02-10T09:30Z"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Esta respuesta se presenta en caso de ocurrir un error inesperado en la aplicación"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MsgRsDefaultDef"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "operationId": "AccountLimitCommand",
+        "summary": "Modificación de topes de transacciones por canales",
+        "description": "Modifica los topes de montos máximos y transacciones máximas por canal.",
+        "x-amazon-apigateway-integration": {
+          "uri": "${account_products_lbda_uri}",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "get": {
+        "tags": [
+          "Account Limits"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AcctLimitsQuery"
+                }
+              }
+            },
+            "description": "Consulta de limites(topes) de una cuenta"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MsgRsDefaultDef"
+                },
+                "examples": {
+                  "MsgRsErrorDefExample": {
+                    "value": {
+                      "Status": {
+                        "ServerStatusCode": "400",
+                        "Severity": "Error",
+                        "StatusCode": 400,
+                        "StatusDesc": "Problems Status 400"
+                      },
+                      "EndDt": "2018-02-10T09:30Z"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Esta respuesta se presenta en caso de que alguno de los parámetros enviados no corresponda con los parámetros esperados"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MsgRsDefaultDef"
+                }
+              }
+            },
+            "description": "api key invalido o ip no registrada"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MsgRsDefaultDef"
+                }
+              }
+            },
+            "description": "La cuenta cuenta no existe"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MsgRsDefaultDef"
+                },
+                "examples": {
+                  "MsgRsErrorDefExample": {
+                    "value": {
+                      "Status": {
+                        "ServerStatusCode": "500",
+                        "Severity": "Error",
+                        "StatusCode": 500,
+                        "StatusDesc": "Problems Status 500"
+                      },
+                      "EndDt": "2018-02-10T09:30Z"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Esta respuesta se presenta en caso de ocurrir un error inesperado en la aplicación"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MsgRsDefaultDef"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "operationId": "AccountLimitQuery",
+        "summary": "Consulta los topes de transacciones por canales de una cuenta",
+        "description": "Consulta los topes de transacciones por canales de una cuenta.",
+        "x-amazon-apigateway-integration": {
+          "uri": "${account_products_lbda_uri}",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "parameters": [
+        {
+          "name": "X-RqUID",
+          "description": "Identificador único del mensaje",
+          "schema": {
+            "format": "uuid",
+            "maxLength": 36,
+            "minLength": 1,
+            "pattern": "^(?!.*<[^>]+>).*",
+            "type": "string"
+          },
+          "in": "header",
+          "required": true
+        },
+        {
+          "name": "AcctType",
+          "description": "Tipo de producto DDA: Cuenta Corriente,SDA: Cuenta Ahorros",
+          "schema": {
+            "enum": [
+              "DDA",
+              "SDA"
+            ],
+            "type": "string"
+          },
+          "in": "path",
+          "required": true,
+          "examples": {
+            "AcctTypeExample": {
+              "value": "SDA"
+            }
+          }
+        },
+        {
+          "name": "AcctId",
+          "description": "Número de producto",
+          "schema": {
+            "maxLength": 10,
+            "pattern": "^[a-zA-Z0-9]*$",
+            "type": "string"
+          },
+          "in": "path",
+          "required": true,
+          "examples": {
+            "AcctIdExample": {
+              "value": "0019697143"
+            }
+          }
+        },
+        {
+          "name": "X-GovIssueIdentType",
+          "description": "Tipo de documento",
+          "schema": {
+            "enum": [
+              "CC",
+              "CE",
+              "LC",
+              "NI",
+              "OT",
+              "PA",
+              "RC",
+              "TI"
+            ],
+            "type": "string"
+          },
+          "in": "header",
+          "required": true
+        },
+        {
+          "name": "X-IdentSerialNum",
+          "description": "Numero del documento",
+          "schema": {
+            "maxLength": 25,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9]*$",
+            "type": "string"
+          },
+          "in": "header",
+          "required": true
+        },
+        {
+          "name": "X-IPAddr",
+          "description": "IP origen de la invocación",
+          "schema": {
+            "maxLength": 16,
+            "minLength": 0,
+            "pattern": "^(?!.*<[^>]+>).*",
+            "type": "string"
+          },
+          "in": "header",
+          "required": true
+        },
+        {
+          "name": "X-CompanyId",
+          "description": "Código de empresa que realiza la invocación",
+          "schema": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^(?!.*<[^>]+>).*",
+            "type": "string"
+          },
+          "in": "header",
+          "required": true
+        },
+        {
+          "name": "X-Name",
+          "description": "Nombre de la aplicación que consume la API",
+          "schema": {
+            "enum": [
+              "LibreDestino",
+              "TarjetaDeCredito",
+              "CuentaDeAhorros",
+              "Libranzas",
+              "Vivienda",
+              "Crediservice",
+              "ADN",
+              "CDT",
+              "Vehiculos",
+              "Microfinanzas",
+              "Omnicanalidad"
+            ],
+            "type": "string"
+          },
+          "in": "header",
+          "required": true
+        },
+        {
+          "name": "X-Channel",
+          "description": "Canal origen de consumo de la transacción",
+          "schema": {
+            "enum": [
+              "Web",
+              "Banca Movil",
+              "Banca Virtual",
+              "Aliado",
+              "FuerzaMovil",
+              "Oficina",
+              "Microfinanzas",
+              "PSE",
+              "BdB Empresas"
+            ],
+            "type": "string"
+          },
+          "in": "header",
+          "required": true,
+          "examples": {
+            "XChannelExample": {
+              "value": "Oficina"
+            }
+          }
+        },
+        {
+          "examples": {
+            "X-DeviceIdExample": {
+              "value": "499EA8D423170AA3ED9481CD458B9C537599BCC9A75EC892E8A803F167F9C379"
+            }
+          },
+          "name": "X-DeviceId",
+          "description": "Fingerprint de dispositivo o navegador",
+          "schema": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9]*$",
+            "type": "string"
+          },
+          "in": "header",
+          "required": true
+        },
+        {
+          "name": "X-TerminalId",
+          "description": "Id de terminal",
+          "schema": {
+            "maxLength": 50,
+            "pattern": "^(?!.*<[^>]+>).*",
+            "type": "string",
+            "example": "890"
+          },
+          "in": "header",
+          "required": true
+        }
+      ]
+    },
+    "/V1/enterprise/customer/account/gmf": {
+      "post": {
+        "tags": [
+          "Account GMF"
+        ],
+        "requestBody": {
+          "description": "Recurso para marcación de exención fiscal de GMF",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GMFTaxMarkCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "La operación se realiza correctamente."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MsgRsDefaultDef"
+                },
+                "examples": {
+                  "MsgRsErrorDefExample": {
+                    "value": {
+                      "Status": {
+                        "ServerStatusCode": "400",
+                        "Severity": "Error",
+                        "StatusCode": 400,
+                        "StatusDesc": "Problems Status 400"
+                      },
+                      "EndDt": "2018-02-10T09:30Z"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Esta respuesta se presenta en caso de que alguno de los parámetros enviados no corresponda con los parámetros esperados"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MsgRsDefaultDef"
+                }
+              }
+            },
+            "description": "api key invalido o ip no registrada"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MsgRsDefaultDef"
+                }
+              }
+            },
+            "description": "La cuenta cuenta no existe"
+          },
+
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MsgRsDefaultDef"
+                },
+                "examples": {
+                  "MsgRsErrorDefExample": {
+                    "value": {
+                      "Status": {
+                        "ServerStatusCode": "500",
+                        "Severity": "Error",
+                        "StatusCode": 500,
+                        "StatusDesc": "Problems Status 500"
+                      },
+                      "EndDt": "2018-02-10T09:30Z"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Esta respuesta se presenta en caso de ocurrir un error inesperado en la aplicación"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MsgRsDefaultDef"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "operationId": "AccountGMFTaxMarkCommand",
+        "summary": "Recurso para marcación de exención fiscal de GMF",
+        "description": "Servicio que permite realizar marcación en GMF sobre cuentas corrientes y cuentas de ahorros.",
+        "x-amazon-apigateway-integration": {
+          "uri": "${account_products_lbda_uri}",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "parameters": [
+        {
+          "name": "X-RqUID",
+          "description": "Identificador único del mensaje",
+          "schema": {
+            "format": "uuid",
+            "maxLength": 36,
+            "minLength": 1,
+            "pattern": "^(?!.*<[^>]+>).*",
+            "type": "string"
+          },
+          "in": "header",
+          "required": true
+        },
+        {
+          "name": "X-GovIssueIdentType",
+          "description": "Tipo de documento",
+          "schema": {
+            "enum": [
+              "CC",
+              "CE",
+              "LC",
+              "NI",
+              "OT",
+              "PA",
+              "RC",
+              "TI"
+            ],
+            "type": "string"
+          },
+          "in": "header",
+          "required": true
+        },
+        {
+          "name": "X-IdentSerialNum",
+          "description": "Numero del documento",
+          "schema": {
+            "maxLength": 25,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9]*$",
+            "type": "string"
+          },
+          "in": "header",
+          "required": true
+        },
+        {
+          "name": "X-IPAddr",
+          "description": "IP origen de la invocación",
+          "schema": {
+            "maxLength": 16,
+            "minLength": 0,
+            "pattern": "^(?!.*<[^>]+>).*",
+            "type": "string"
+          },
+          "in": "header",
+          "required": true
+        },
+        {
+          "name": "X-CompanyId",
+          "description": "Código de empresa que realiza la invocación",
+          "schema": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^(?!.*<[^>]+>).*",
+            "type": "string"
+          },
+          "in": "header",
+          "required": true
+        },
+        {
+          "name": "X-Name",
+          "description": "Nombre de la aplicación que consume la API",
+          "schema": {
+            "enum": [
+              "LibreDestino",
+              "TarjetaDeCredito",
+              "CuentaDeAhorros",
+              "Libranzas",
+              "Vivienda",
+              "Crediservice",
+              "ADN",
+              "CDT",
+              "Vehiculos",
+              "Microfinanzas",
+              "Omnicanalidad"
+            ],
+            "type": "string"
+          },
+          "in": "header",
+          "required": true
+
+        },
+        {
+          "name": "X-Channel",
+          "description": "Canal origen de consumo de la transacción",
+          "schema": {
+            "enum": [
+              "Web",
+              "Banca Movil",
+              "Banca Virtual",
+              "Aliado",
+              "FuerzaMovil",
+              "Oficina",
+              "Microfinanzas",
+              "PSE",
+              "BdB Empresas"
+            ],
+            "type": "string"
+          },
+          "in": "header",
+          "required": true,
+          "examples": {
+            "XChannelExample": {
+              "value": "Oficina"
+            }
+          }
+        },
+        {
+          "examples": {
+            "X-DeviceIdExample": {
+              "value": "499EA8D423170AA3ED9481CD458B9C537599BCC9A75EC892E8A803F167F9C379"
+            }
+          },
+          "name": "X-DeviceId",
+          "description": "Fingerprint de dispositivo o navegador",
+          "schema": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9]*$",
+            "type": "string"
+          },
+          "in": "header",
+          "required": true
+        },
+        {
+          "examples": {
+            "X-TerminalIdExample": {
+              "value": "890"
+            }
+          },
+          "name": "X-TerminalId",
+          "description": "Id de terminal",
+          "schema": {
+            "maxLength": 50,
+            "pattern": "^(?!.*<[^>]+>).*",
+            "type": "string"
+          },
+          "in": "header",
+          "required": true
+        },
+        {
+          "examples": {
+            "X-BranchIdExample": {
+              "value": "PB"
+            }
+          },
+          "name": "X-BranchId",
+          "description": "Sucursal de la entidad donde la cuenta tiene la exención de GMF",
+          "in": "header",
+          "required": true,
+          "schema": {
+            "maxLength": 50,
+            "pattern": "^(?!.*<[^>]+>).*",
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "AccountActivation": {
+        "description": "Objeto para cambiar el estado de un producto correspondiente a un cliente, de debe actualizar",
+        "required": [
+          "accType",
+          "acctId",
+          "acctStatus"
+        ],
+        "type": "object",
+        "properties": {
+          "acctId": {
+            "description": "Número de producto ",
+            "maxLength": 16,
+            "pattern": "^(?!.*<[^>]+>).*",
+            "type": "string"
+          },
+          "accType": {
+            "description": "Tipo de producto DDA: Cuenta Corriente,SDA: Cuenta Ahorros",
+            "enum": [
+              "DDA",
+              "SDA"
+            ],
+            "type": "string",
+            "default": "SDA"
+          },
+          "acctStatus": {
+            "description": "Código de estado del producto",
+            "enum": [
+              "ACTIVE",
+              "FROZEN"
+            ],
+            "type": "string",
+            "default": "ACTIVE"
+          }
+        },
+        "additionalProperties": false,
+        "example": {
+          "AcctId": "0000000000000000001",
+          "AcctType": "SDA",
+          "acctStatus": "ACTIVE"
+        }
+      },
+      "AcctLimitItem": {
+        "type": "object",
+        "description": "Datos de tope por Canal",
+        "properties": {
+          "NetworkOwner": {
+            "type": "string",
+            "description": "Canal que va a afectar la modificación",
+            "enum": [
+              "PB",
+              "IVR",
+              "AUT",
+              "AGI",
+              "PIN",
+              "AVA",
+              "PSE",
+              "AGE",
+              "BM",
+              "CNB",
+              "AVP",
+              "CTD"
+            ],
+            "default": "BM"
+          },
+          "Desc": {
+            "type": "string",
+            "description": "Servicio",
+            "pattern": "^(?!.*<[^>]+>).*",
+            "maxLength": 50,
+            "example": "Banca Movil"
+          },
+          "TrnCount": {
+            "type": "string",
+            "description": "Número máximo de transacciones",
+            "pattern": "^(?!.*<[^>]+>).*",
+            "maxLength": 6,
+            "example": "10"
+          },
+          "Amt": {
+            "type": "string",
+            "description": "Monto máximo que va a manejar la transacción",
+            "pattern": "^(?!.*<[^>]+>).*",
+            "maxLength": 10,
+            "example": "10000000"
+          }
+        },
+        "required": [
+          "NetworkOwner",
+          "TrnCount",
+          "Amt"
+        ],
+        "additionalProperties": false
+      },
+      "AcctLimitsQuery": {
+        "type": "object",
+        "description": "Información de los topes de una cuenta",
+        "properties": {
+          "AcctLimits": {
+            "description": "Datos de Canal a modificar, máximo 10 campos de este agregado",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AcctLimitItem"
+            },
+            "maxItems": 12
+          },
+          "Amt": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Monto tope",
+            "maximum": 9999999999,
+            "minimum": 0,
+            "example": 90000000
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "AcctLimits"
+        ]
+      },
+      "AcctLimitsCommand": {
+        "type": "object",
+        "description": "Información de los topes de una cuenta para actualizar.",
+        "properties": {
+          "AcctLimits": {
+            "type": "array",
+            "description": "Información de los topes AcctLimitsInfoRec",
+            "items": {
+              "$ref": "#/components/schemas/AcctLimitItem"
+            },
+            "maxItems": 12
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "AcctLimits"
+        ]
+      },
+      "AccountToGMF": {
+        "type": "object",
+        "description": "Datos basicos de una cuenta",
+        "properties": {
+          "AcctId": {
+            "description": "Número de producto",
+            "maxLength": 10,
+            "pattern": "^(?!.*<[^>]+>).*",
+            "type": "string",
+            "example": "0019697143"
+          },
+          "AccType": {
+            "description": "Tipo de producto DDA: Cuenta Corriente,SDA: Cuenta Ahorros",
+            "enum": [
+              "DDA",
+              "SDA"
+            ],
+            "type": "string",
+            "default": "SDA"
+          },
+          "Type": {
+            "description": "Tipo o clasificación asociado a la cuenta que se va a marcar con la exención GMF \n\n 01:COLECTIVA\n\n 02:CONJUNTA\n\n 03:INDIVIDUAL\n\n 04:PERSONA JURIDICA\n\n 05:NO REPORTADO\n\n 06:CUENTA AHORROS CAE\n\n 07:CUENTA AHORROS CATS\n\n 08:TARJETA PREPAGO",
+            "type": "string",
+            "enum": [
+              "COLECTIVA",
+              "CONJUNTA",
+              "INDIVIDUAL",
+              "PERSONA JURIDICA",
+              "NO REPORTADO",
+              "CUENTA AHORROS CAE",
+              "CUENTA AHORROS CATS",
+              "TARJETA PREPAG"
+            ],
+            "default": "INDIVIDUAL"
+          },
+          "Status": {
+            "description": "Estado de la cuenta \n\n 01:NORMAL \n\n 02:INACTIVA EMBARGADA\n\n 03:INACTIVA\n\n 04:ACTIVA EMBARGADA\n\n 05:SALDADA POR LA ENTIDAD\n\n 06:SALDADA VOLUNTARIAMENTE",
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "INACTIVA EMBARGADA",
+              "INACTIVA",
+              "ACTIVA EMBARGADA",
+              "SALDADA POR LA ENTIDAD",
+              "SALDADA VOLUNTARIAMENTE"
+            ],
+            "default": "NORMAL"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "AcctId",
+          "AccType"
+        ]
+      },
+      "GMFTaxMarkCommand": {
+        "type": "object",
+        "description": "Recurso para marcación de exención fiscal de GMF.",
+        "properties": {
+          "AccountToGMF":{
+            "$ref": "#/components/schemas/AccountToGMF"
+          },
+          "TrnType":{
+            "type":"string",
+            "description":"Nueva información ( 4 = Exenta,0 = No Exenta)",
+            "enum": [
+              "Exenta",
+              "No Exenta"
+            ],
+            "default":"Exenta"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "TrnType",
+          "AccountToGMF"
+        ]
+      },
+      "MsgRsDefaultDef": {
+        "description": "Message Response Error definition",
+        "required": [
+          "EndDt"
+        ],
+        "type": "object",
+        "properties": {
+          "Status": {
+            "$ref": "#/components/schemas/Status"
+          },
+          "EndDt": {
+            "description": "Indica fecha de finalización, terminación, etc.",
+            "maxLength": 20,
+            "minLength": 0,
+            "pattern": "^(?!.*<[^>]+>).*",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Status": {
+        "description": "Status Error ",
+        "type": "object",
+        "properties": {
+          "StatusCode": {
+            "format": "int64",
+            "description": "Código de respuesta",
+            "maximum": 99999,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "ServerStatusCode": {
+            "description": "Código de respuesta del servidor",
+            "maxLength": 10,
+            "minLength": 0,
+            "pattern": "^(?!.*<[^>]+>).*",
+            "type": "string"
+          },
+          "Severity": {
+            "description": "Código de severidad de la respuesta: Info: Informativo, Warning: Advertencia, Error: Error",
+            "enum": [
+              "Info",
+              "Warning",
+              "Error"
+            ],
+            "type": "string"
+          },
+          "StatusDesc": {
+            "description": "Explicación asociada al statusCode",
+            "maxLength": 100,
+            "minLength": 0,
+            "pattern": "^(?!.*<[^>]+>).*",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "x-api-key",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "api_key": []
+    }
+  ],
+  "x-amazon-apigateway-request-validators": {
+    "Validar cuerpo, parámetros de cadena de consulta y encabezados": {
+      "validateRequestParameters": true,
+      "validateRequestBody": true
+    }
+  }
+}

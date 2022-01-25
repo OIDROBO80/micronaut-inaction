@@ -10,7 +10,6 @@ class HealthClientSpec extends Specification {
     @Inject
     HealthClient healthClient
 
-
     void 'test health controller'(){
         expect:
         healthClient.health() == "Healthy OK!"

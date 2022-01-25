@@ -1,0 +1,19 @@
+name: release
+
+on:
+  workflow_run:
+    workflows: ['qa']
+    branches: [ 'qa_sp21' ]
+    types: [ completed ]
+
+env:
+  REF: ${{ github.ref }}
+
+jobs:
+  validation:
+    name: Gradle Wrapper
+    runs-on: ubuntu-latest
+    steps:
+      # Check out current repository
+      - name: Fetch Sources
+        uses: actions/checkout@v2

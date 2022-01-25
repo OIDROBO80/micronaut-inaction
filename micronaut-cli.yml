@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: co.com.bancodebogota
+testFramework: spock
+sourceLanguage: java
+buildTool: gradle_kotlin
+features: [annotation-api, app-name, graalvm, gradle, http-client, java, java-application, logback, netty-server, readme, shade, spock, yaml]

@@ -1,0 +1,45 @@
+{
+  "family": "cad-matrix-template",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "256",
+  "memory": "512",
+  "networkMode": "awsvpc",
+  "taskRoleArn": "arn:aws:iam::826786428091:role/cad-matrix-template-ecs-role",
+  "executionRoleArn": "arn:aws:iam::826786428091:role/cad-matrix-template-ecs-role",
+  "containerDefinitions": [
+    {
+      "portMappings": [
+        {
+          "protocol": "tcp",
+          "containerPort": 8081
+        }
+      ],
+      "cpu": 256,
+      "environment": [
+        {
+          "name": "SERVER_PORT",
+          "value": "8080"
+        },
+        {
+          "name": "ENVIRONMENT",
+          "value": "qa"
+        }
+      ],
+      "essential": true,
+      "image": "${image_url}",
+      "memory": 512,
+      "memoryReservation": 256,
+      "name": "cad-matrix-template",
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-region": "us-east-1",
+          "awslogs-group": "/aws/ecs/cad-matrix-template",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}

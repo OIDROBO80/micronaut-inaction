@@ -1,18 +1,19 @@
 package co.com.bancodebogota.context.account.limits.application.find
-import co.com.bancodebogota.context.account.limits.domain.AccountLimitsQuery
-import co.com.bancodebogota.context.account.limits.domain.AccountLimitsRepository
+
+import co.com.bancodebogota.context.account.limits.domain.interfaces.APIRegresRepository
+import co.com.bancodebogota.context.account.limits.domain.user.UserDto
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import spock.lang.Specification
 import spock.lang.Subject
 
 @MicronautTest
-class AccountLimitsFinderSpec extends Specification {
-    static final ACCOUNT_LIMITS_QUERY = new AccountLimitsQuery(new ArrayList<>())
+class UsersFinderSpec extends Specification {
+    static final UserDto ACCOUNT_LIMITS_QUERY = new UserDto()
 
-    AccountLimitsRepository accountLimitsRepository = Mock()
+    APIRegresRepository accountLimitsRepository = Mock()
 
     @Subject
-    AccountLimitsFinder accountLimitsFinder = new AccountLimitsFinder(accountLimitsRepository)
+    UsersFinder accountLimitsFinder = new UsersFinder(accountLimitsRepository)
 
     def "should find account limits successfully"() {
         given: "An account number"

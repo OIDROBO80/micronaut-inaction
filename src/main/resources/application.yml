@@ -11,10 +11,9 @@ micronaut:
     event-loops:
       other:
         num-threads: 10
-apiTvs:
-  account:
-    limits:
-      url: http://localhost:8080/account
+api:
+  regres:
+    url: https://reqres.in/api
 
 
 

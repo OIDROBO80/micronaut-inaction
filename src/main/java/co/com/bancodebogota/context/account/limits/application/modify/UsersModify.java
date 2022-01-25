@@ -1,7 +1,6 @@
 package co.com.bancodebogota.context.account.limits.application.modify;
 
 import co.com.bancodebogota.context.account.limits.domain.interfaces.APIRegresRepository;
-import co.com.bancodebogota.context.account.limits.domain.user.UsersDto;
 import jakarta.inject.Singleton;
 
 @Singleton

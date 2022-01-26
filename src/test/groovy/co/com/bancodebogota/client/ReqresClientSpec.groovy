@@ -1,18 +1,20 @@
 package co.com.bancodebogota.client
 
+import co.com.bancodebogota.api.ReqresController
+import co.com.bancodebogota.context.account.limits.domain.interfaces.APIRegresRepository
 import co.com.bancodebogota.context.account.limits.domain.interfaces.UsersFinder
+import co.com.bancodebogota.context.account.limits.domain.user.Data
 import co.com.bancodebogota.context.account.limits.domain.user.DataUser
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import jakarta.inject.Inject
 import spock.lang.Specification
+import spock.lang.Subject
 
 @MicronautTest
 class ReqresClientSpec extends Specification {
 
     @Inject
     ReqresClient reqresClient
-    @Inject
-    UsersFinder usersFinder
 
     void 'get information User'(){
         when: "get information client"

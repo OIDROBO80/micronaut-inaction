@@ -14,7 +14,7 @@ public class UsersListFinder implements co.com.bancodebogota.context.account.lim
     }
 
     @Override
-    public DataUsers informationUsersListData(int idUsers) {
-        return apiReqres.informationUsersListData(idUsers);
+    public DataUsers informationUsersListData(int idPage) {
+        return apiReqres.informationUsersListData(idPage);
     }
 }

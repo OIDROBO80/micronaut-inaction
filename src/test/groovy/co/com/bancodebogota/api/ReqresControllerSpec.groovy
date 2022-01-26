@@ -1,6 +1,5 @@
 package co.com.bancodebogota.api
 
-import co.com.bancodebogota.client.ReqresClient
 import co.com.bancodebogota.context.account.limits.domain.interfaces.UsersFinder
 import co.com.bancodebogota.context.account.limits.domain.user.Data
 import co.com.bancodebogota.context.account.limits.domain.user.DataUser

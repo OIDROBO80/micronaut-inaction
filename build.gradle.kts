@@ -49,7 +49,7 @@ tasks.withType<Test> {
 
 tasks.test {
     extensions.configure(JacocoTaskExtension::class) {
-        destinationFile = file("$buildDir/jacoco/jacoco.exec")
+        //destinationFile = file("$buildDir/jacoco/jacoco.exec")
     }
 
     finalizedBy("jacocoTestReport")

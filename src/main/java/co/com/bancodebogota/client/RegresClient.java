@@ -6,10 +6,10 @@ import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.PathVariable;
 import io.micronaut.http.client.annotation.Client;
 
-@Client("/users")
+@Client("/api/${api.version:v1}")
 public interface RegresClient {
 
-    @Get("/{iduser}")
+    @Get("users/{iduser}")
     DataUser informationUserData(@PathVariable("iduser") int idUser);
 
 

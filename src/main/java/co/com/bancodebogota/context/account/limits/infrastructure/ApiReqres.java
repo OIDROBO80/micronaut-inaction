@@ -2,10 +2,8 @@ package co.com.bancodebogota.context.account.limits.infrastructure;
 
 import co.com.bancodebogota.context.account.limits.domain.user.DataUser;
 import co.com.bancodebogota.context.account.limits.domain.user.DataUsers;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.PathVariable;
-import io.micronaut.http.annotation.Post;
-import io.micronaut.http.annotation.Put;
+import io.micronaut.http.HttpResponse;
+import io.micronaut.http.annotation.*;
 import io.micronaut.http.client.annotation.Client;
 
 @Client("${api.regres.url}")
@@ -20,8 +18,11 @@ public interface ApiReqres {
     @Post("users")
     Object createUser();
 
-    @Put("users/{iduser}")
-    Object updateUser(@PathVariable("iduser") int idUser);
+    @Put("users/{idUser}")
+    Object updateUser(@PathVariable("idUser") int idUser);
+
+    @Delete("users/{idUser}")
+    void deleteUser(@PathVariable("idUser") int idUser);
 
 
 }

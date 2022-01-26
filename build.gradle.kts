@@ -22,6 +22,7 @@ micronaut {
 }
 
 dependencies {
+
     annotationProcessor("io.micronaut:micronaut-http-validation")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-runtime")

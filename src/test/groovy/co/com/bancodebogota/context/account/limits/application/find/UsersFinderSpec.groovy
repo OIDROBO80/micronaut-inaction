@@ -1,14 +1,14 @@
 package co.com.bancodebogota.context.account.limits.application.find
 
 import co.com.bancodebogota.context.account.limits.domain.interfaces.APIRegresRepository
-import co.com.bancodebogota.context.account.limits.domain.user.UserDto
+import co.com.bancodebogota.context.account.limits.domain.user.Data
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import spock.lang.Specification
 import spock.lang.Subject
 
 @MicronautTest
 class UsersFinderSpec extends Specification {
-    static final UserDto ACCOUNT_LIMITS_QUERY = new UserDto()
+    static final Data ACCOUNT_LIMITS_QUERY = new Data()
 
     APIRegresRepository accountLimitsRepository = Mock()
 

@@ -1,6 +1,5 @@
 package co.com.bancodebogota.api;
 
-import co.com.bancodebogota.client.RegresClient;
 import co.com.bancodebogota.context.account.limits.domain.interfaces.UsersFinder;
 import co.com.bancodebogota.context.account.limits.domain.user.DataUser;
 import io.micronaut.http.annotation.Controller;

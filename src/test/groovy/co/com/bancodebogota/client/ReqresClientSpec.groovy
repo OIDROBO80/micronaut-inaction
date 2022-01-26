@@ -10,13 +10,13 @@ import spock.lang.Specification
 class ReqresClientSpec extends Specification {
 
     @Inject
-    RegresClient regresClient
+    ReqresClient reqresClient
     @Inject
     UsersFinder usersFinder
 
     void 'get information User'(){
         when: "get information client"
-        def informationUser = regresClient.informationUserData(idUser)
+        def informationUser = reqresClient.informationUserData(idUser)
 
         then: "the tags id is include"
         informationUser.data.id == expect
@@ -29,7 +29,7 @@ class ReqresClientSpec extends Specification {
 
     void 'Validate structure information User'(){
         when: "get information client"
-        def informationUser = regresClient.informationUserData(1)
+        def informationUser = reqresClient.informationUserData(1)
 
         then: "The information is the UserDto Class"
         informationUser.getClass() == DataUser.class

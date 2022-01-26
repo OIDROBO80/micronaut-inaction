@@ -2,10 +2,8 @@ package co.com.bancodebogota.api;
 
 
 import co.com.bancodebogota.context.account.limits.domain.interfaces.*;
-import co.com.bancodebogota.context.account.limits.domain.user.DataUser;
-import co.com.bancodebogota.context.account.limits.domain.user.DataUsers;
 import io.micronaut.http.HttpResponse;
-import io.micronaut.http.HttpStatus;
+
 import io.micronaut.http.annotation.*;
 
 @Controller("/api/${api.version:v1}")

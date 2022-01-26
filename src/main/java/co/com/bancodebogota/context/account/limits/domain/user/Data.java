@@ -1,7 +1,5 @@
 package co.com.bancodebogota.context.account.limits.domain.user;
 
-import java.util.ArrayList;
-
 public class Data {
     //DATA
     public int id;

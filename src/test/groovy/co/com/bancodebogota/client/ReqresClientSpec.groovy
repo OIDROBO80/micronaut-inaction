@@ -5,10 +5,10 @@ import jakarta.inject.Inject
 import spock.lang.Specification
 
 @MicronautTest
-class RegresClientSpec extends Specification {
+class ReqresClientSpec extends Specification {
 
     @Inject
-    RegresClient accountLimitsClient
+    ReqresClient accountLimitsClient
 
 
     void 'test health controller'(){

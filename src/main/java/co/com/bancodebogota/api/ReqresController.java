@@ -1,22 +1,25 @@
 package co.com.bancodebogota.api;
 
-import co.com.bancodebogota.client.RegresClient;
+import co.com.bancodebogota.context.account.limits.application.create.UsersCreate;
 import co.com.bancodebogota.context.account.limits.domain.interfaces.UsersFinder;
+import co.com.bancodebogota.context.account.limits.domain.interfaces.UsersListFinder;
 import co.com.bancodebogota.context.account.limits.domain.user.DataUser;
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.PathVariable;
-import io.micronaut.http.annotation.Put;
+import co.com.bancodebogota.context.account.limits.domain.user.DataUsers;
+import io.micronaut.http.annotation.*;
 
 @Controller("/api/${api.version:v1}")
 public final class ReqresController {
 
 
     private final UsersFinder usersFinder;
+    private final UsersListFinder usersListFinder;
+    private final UsersCreate usersCreate;
 
-    public ReqresController(UsersFinder usersFinder) {
+    public ReqresController(UsersFinder usersFinder, UsersListFinder usersListFinder, UsersCreate usersCreate) {
 
         this.usersFinder = usersFinder;
+        this.usersListFinder = usersListFinder;
+        this.usersCreate = usersCreate;
     }
 
     @Get(value="users/{iduser}")
@@ -25,8 +28,15 @@ public final class ReqresController {
         return usersFinder.informationUserData(idUser);
     }
 
-    @Put(value="/{iduser}")
-    public void  updateUser(@PathVariable("iduser") int idUser) {
-        //
+    @Get(value = "users/list/{idUsers}")
+    public DataUsers informationUsersListData(@PathVariable("idUsers")int idUsers){
+        return usersListFinder.informationUsersListData(idUsers);
     }
+
+    @Post(value = "users")
+    public Object createUser(){
+        return usersCreate.userCreate();
+    }
+
+
 }

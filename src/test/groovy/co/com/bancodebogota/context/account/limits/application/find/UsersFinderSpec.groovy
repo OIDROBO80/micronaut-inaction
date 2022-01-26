@@ -1,6 +1,6 @@
 package co.com.bancodebogota.context.account.limits.application.find
 
-import co.com.bancodebogota.context.account.limits.domain.interfaces.APIRegresRepository
+
 import co.com.bancodebogota.context.account.limits.domain.user.Data
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import spock.lang.Specification

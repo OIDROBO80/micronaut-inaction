@@ -9,6 +9,4 @@ public class Data {
     public String first_name;
     public String last_name;
     public String avatar;
-    public Data data;
-    public Support support;
 }

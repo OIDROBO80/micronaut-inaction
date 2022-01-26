@@ -13,6 +13,7 @@ public final class UsersFinder implements co.com.bancodebogota.context.account.l
         this.apiReqres = apiReqres;
     }
 
+    @Override
     public DataUser informationUserData(int idUser) {
 
         return apiReqres.informationUserData(idUser);

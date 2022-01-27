@@ -1,5 +1,8 @@
 package co.com.bancodebogota.context.account.limits.domain.interfaces;
 
+import io.micronaut.http.HttpResponse;
+
 public interface UsersDelete {
-    void deleteUser(int idUser);
+
+    HttpResponse run(int idUser);
 }

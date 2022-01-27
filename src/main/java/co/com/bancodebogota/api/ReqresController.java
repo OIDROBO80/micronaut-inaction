@@ -28,30 +28,28 @@ public final class ReqresController {
     @Get(value="users/{iduser}")
     public HttpResponse informationUserData(@PathVariable("iduser") int idUser) {
 
-        return HttpResponse.ok(usersFinder.informationUserData(idUser));
+        return HttpResponse.ok(usersFinder.run(idUser));
     }
 
     @Get(value = "users/list/{idPage}")
     public HttpResponse informationUsersListData(@PathVariable("idPage")int idPage){
-        return HttpResponse.ok(usersListFinder.informationUsersListData(idPage));
+        return usersListFinder.run(idPage);
     }
 
     @Post(value = "users")
     public HttpResponse createUser(){
-        return HttpResponse.created(usersCreate.userCreate());
+        return usersCreate.run();
     }
 
     @Put("users/{idUser}")
     public HttpResponse updateUser(@PathVariable("idUser") int idUser){
-
-        return HttpResponse.ok(usersUpdate.updateUser(idUser));
+        return usersUpdate.run(idUser);
     }
 
 
     @Delete("users/{idUser}")
     public HttpResponse deleteUser(@PathVariable("idUser") int idUser){
-        usersDelete.deleteUser(idUser);
-        return HttpResponse.noContent();
+        return this.usersDelete.run(idUser);
     }
 
 

@@ -1,7 +1,9 @@
 package co.com.bancodebogota.context.account.limits.domain.interfaces;
 
 import co.com.bancodebogota.context.account.limits.domain.user.DataUser;
+import io.micronaut.http.HttpResponse;
 
 public interface UsersFinder{
-    DataUser informationUserData(int idUser);
+
+    HttpResponse run(int idUser);
 }

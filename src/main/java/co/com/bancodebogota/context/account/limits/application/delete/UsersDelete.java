@@ -1,5 +1,6 @@
 package co.com.bancodebogota.context.account.limits.application.delete;
 
+import co.com.bancodebogota.context.account.limits.domain.interfaces.UserRepository;
 import co.com.bancodebogota.context.account.limits.infrastructure.ApiReqres;
 import io.micronaut.http.HttpResponse;
 import jakarta.inject.Singleton;
@@ -7,14 +8,14 @@ import jakarta.inject.Singleton;
 @Singleton
 public class UsersDelete implements co.com.bancodebogota.context.account.limits.domain.interfaces.UsersDelete {
 
-    private final ApiReqres apiReqres;
+    private final UserRepository userRepository;
 
-    public UsersDelete(ApiReqres apiReqres) {
-        this.apiReqres = apiReqres;
+    public UsersDelete(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
-    public void deleteUser(int idUser) {
-        apiReqres.deleteUser(idUser);
+    public HttpResponse run(int idUser) {
+        return userRepository.deleteUser(idUser);
     }
 }

@@ -1,20 +1,19 @@
 package co.com.bancodebogota.context.account.limits.application.list;
 
+import co.com.bancodebogota.context.account.limits.domain.interfaces.UserRepository;
 import co.com.bancodebogota.context.account.limits.domain.user.DataUsers;
-import co.com.bancodebogota.context.account.limits.infrastructure.ApiReqres;
 import jakarta.inject.Singleton;
 
 @Singleton
-public class UsersListFinder implements co.com.bancodebogota.context.account.limits.domain.interfaces.UsersListFinder {
+public class UsersListFinder{
 
-    private final ApiReqres apiReqres;
+    private final UserRepository userRepository;
 
-    public UsersListFinder(ApiReqres apiReqres) {
-        this.apiReqres = apiReqres;
+    public UsersListFinder(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    @Override
-    public DataUsers informationUsersListData(int idPage) {
-        return apiReqres.informationUsersListData(idPage);
-    }
+    /*public DataUsers usersListData(int idPage){
+        return userRepository.usersListData(idPage);
+    }*/
 }

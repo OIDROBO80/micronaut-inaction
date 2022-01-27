@@ -19,8 +19,8 @@ class ReqresClientSpec extends Specification {
         def informationUser = reqresClient.informationUserData(idUser)
 
         then: "the tags id is include"
-        informationUser.status().code ==200
-        informationUser.getBody().get().data["id"]== expect
+        informationUser.status().code == 200
+        informationUser.getBody().get().data["id"] == expect
 
         where: "if the idUser is equal the value "
         idUser | expect
@@ -32,7 +32,6 @@ class ReqresClientSpec extends Specification {
         when: "get information client"
         def informationUser = reqresClient.informationUserData(1)
 
-        then: "The information is the UserDto Class"
-        informationUser.getBody().get()== DataUser.class
+        then: "The information is the UserDto Class"        informationUser.getBody().get()== DataUser.class
     }*/
 }

@@ -1,20 +1,18 @@
 package co.com.bancodebogota.context.account.limits.application.create;
 
-import co.com.bancodebogota.context.account.limits.infrastructure.ApiReqres;
+import co.com.bancodebogota.context.account.limits.domain.interfaces.UserRepository;
 import jakarta.inject.Singleton;
 
 @Singleton
-public class UsersCreate implements co.com.bancodebogota.context.account.limits.domain.interfaces.UsersCreate {
+public class UsersCreate {
 
-    public  final ApiReqres apiReqres;
+    public  final UserRepository userRepository;
 
-    public UsersCreate(ApiReqres apiReqres) {
-        this.apiReqres = apiReqres;
+    public UsersCreate(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    @Override
-    public Object userCreate() {
-
-        return apiReqres.createUser();
+    public Object run() {
+        return userRepository.createUserReqres();
     }
 }

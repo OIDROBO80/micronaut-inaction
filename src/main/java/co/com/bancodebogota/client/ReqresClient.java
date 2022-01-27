@@ -4,7 +4,7 @@ import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.*;
 import io.micronaut.http.client.annotation.Client;
 
-@Client("/api/${api.version:v1}")
+
 public interface ReqresClient {
 
     @Get("users/{iduser}")

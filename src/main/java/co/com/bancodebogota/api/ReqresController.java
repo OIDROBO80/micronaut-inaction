@@ -27,8 +27,7 @@ public final class ReqresController {
 
     @Get(value="users/{iduser}")
     public HttpResponse informationUserData(@PathVariable("iduser") int idUser) {
-
-        return HttpResponse.ok(usersFinder.run(idUser));
+        return usersFinder.run(idUser);
     }
 
     @Get(value = "users/list/{idPage}")

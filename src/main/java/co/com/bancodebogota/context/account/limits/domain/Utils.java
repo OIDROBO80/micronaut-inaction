@@ -6,7 +6,7 @@ import io.micronaut.http.HttpStatus;
 
 public class Utils {
 
-    public  static HttpResponse validateResponse(DataUser dataUser) {
+    public  static HttpResponse<DataUser> validateResponse(DataUser dataUser) {
         return  HttpResponse.status(HttpStatus.valueOf(dataUser.response.statusCode)).body(dataUser);
     }
 }

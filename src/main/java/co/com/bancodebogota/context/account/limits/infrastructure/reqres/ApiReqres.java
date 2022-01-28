@@ -2,14 +2,13 @@ package co.com.bancodebogota.context.account.limits.infrastructure.reqres;
 
 import co.com.bancodebogota.context.account.limits.domain.user.DataUser;
 import co.com.bancodebogota.context.account.limits.domain.user.DataUsers;
-import io.micronaut.http.annotation.*;
+import io.micronaut.http.annotation.Get;
+import io.micronaut.http.annotation.PathVariable;
+import io.micronaut.http.annotation.Post;
 import io.micronaut.http.client.annotation.Client;
-import org.reactivestreams.Publisher;
-import reactor.core.publisher.Mono;
 
 @Client("${api.regres.url}")
 public interface ApiReqres {
-
 
     @Get("users/apimyself")
     Object getApiMyself();

@@ -14,6 +14,3 @@ micronaut:
 api:
   regres:
     url: http://localhost:8080/api/bdb
-
-
-

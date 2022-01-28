@@ -1,7 +1,7 @@
-package co.com.bancodebogota.context.account.limits.domain.interfaces;
+package co.com.bancodebogota.context.domain.interfaces;
 
-import co.com.bancodebogota.context.account.limits.domain.user.DataUser;
-import co.com.bancodebogota.context.account.limits.domain.user.DataUsers;
+import co.com.bancodebogota.context.domain.user.DataUser;
+import co.com.bancodebogota.context.domain.user.DataUsers;
 
 public interface UserRepository {
     // Get User Reqres by id

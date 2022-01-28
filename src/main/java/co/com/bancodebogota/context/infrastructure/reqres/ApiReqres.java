@@ -1,11 +1,9 @@
-package co.com.bancodebogota.context.account.limits.infrastructure.reqres;
+package co.com.bancodebogota.context.infrastructure.reqres;
 
-import co.com.bancodebogota.context.account.limits.domain.user.DataUser;
-import co.com.bancodebogota.context.account.limits.domain.user.DataUsers;
+import co.com.bancodebogota.context.domain.user.DataUser;
+import co.com.bancodebogota.context.domain.user.DataUsers;
 import io.micronaut.http.annotation.*;
 import io.micronaut.http.client.annotation.Client;
-import org.reactivestreams.Publisher;
-import reactor.core.publisher.Mono;
 
 @Client("${api.regres.url}")
 public interface ApiReqres {

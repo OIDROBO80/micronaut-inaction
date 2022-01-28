@@ -1,6 +1,6 @@
-package co.com.bancodebogota.context.account.limits.domain;
+package co.com.bancodebogota.context.domain;
 
-import co.com.bancodebogota.context.account.limits.domain.user.DataUser;
+import co.com.bancodebogota.context.domain.user.DataUser;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.HttpStatus;
 

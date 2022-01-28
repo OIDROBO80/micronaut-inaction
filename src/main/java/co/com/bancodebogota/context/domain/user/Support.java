@@ -1,4 +1,4 @@
-package co.com.bancodebogota.context.account.limits.domain.user;
+package co.com.bancodebogota.context.domain.user;
 
 public class Support{
     public String url;

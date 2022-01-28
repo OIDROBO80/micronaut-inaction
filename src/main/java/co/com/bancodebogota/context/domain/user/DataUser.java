@@ -1,6 +1,6 @@
-package co.com.bancodebogota.context.account.limits.domain.user;
+package co.com.bancodebogota.context.domain.user;
 
-import co.com.bancodebogota.context.account.limits.domain.response.Response;
+import co.com.bancodebogota.context.domain.response.Response;
 import io.micronaut.core.annotation.Introspected;
 
 @Introspected

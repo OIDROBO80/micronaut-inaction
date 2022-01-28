@@ -1,4 +1,4 @@
-package co.com.bancodebogota.context.account.limits.domain.errors;
+package co.com.bancodebogota.context.domain.errors;
 
 public class Message {
     private String message;

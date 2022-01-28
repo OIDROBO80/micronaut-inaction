@@ -1,12 +1,8 @@
-package co.com.bancodebogota.context.account.limits.domain.user;
-
-import io.micronaut.core.annotation.Introspected;
+package co.com.bancodebogota.context.domain.user;
 
 import java.util.ArrayList;
 
-@Introspected
-public class DataUsers extends Data{
-
+public class Root {
     public int page;
     public int per_page;
     public int total;

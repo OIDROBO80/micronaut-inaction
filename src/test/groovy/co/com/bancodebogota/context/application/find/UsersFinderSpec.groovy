@@ -1,7 +1,7 @@
-package co.com.bancodebogota.context.account.limits.application.find
+package co.com.bancodebogota.context.application.find
 
 
-import co.com.bancodebogota.context.account.limits.domain.user.Data
+import co.com.bancodebogota.context.domain.user.Data
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import spock.lang.Specification
 import spock.lang.Subject

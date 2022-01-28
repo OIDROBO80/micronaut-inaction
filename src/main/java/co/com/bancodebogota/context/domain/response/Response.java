@@ -1,4 +1,4 @@
-package co.com.bancodebogota.context.account.limits.domain.response;
+package co.com.bancodebogota.context.domain.response;
 
 public class Response {
     public int statusCode;

@@ -1,10 +1,10 @@
 package co.com.bancodebogota.api;
 
 
-import co.com.bancodebogota.context.account.limits.domain.Utils;
-import co.com.bancodebogota.context.account.limits.domain.interfaces.User;
-import co.com.bancodebogota.context.account.limits.domain.user.DataUser;
-import co.com.bancodebogota.context.account.limits.domain.user.DataUsers;
+import co.com.bancodebogota.context.domain.Utils;
+import co.com.bancodebogota.context.domain.interfaces.User;
+import co.com.bancodebogota.context.domain.user.DataUser;
+import co.com.bancodebogota.context.domain.user.DataUsers;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;

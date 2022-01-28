@@ -1,4 +1,4 @@
-package co.com.bancodebogota.context.account.limits.infrastructure;
+package co.com.bancodebogota.context.account.limits.infrastructure.reqres;
 
 import co.com.bancodebogota.context.account.limits.domain.interfaces.UserRepository;
 import co.com.bancodebogota.context.account.limits.domain.user.DataUser;
@@ -27,5 +27,10 @@ public class ApiReqresRepository implements UserRepository {
     @Override
     public Object createUserReqres() {
         return apiReqres.createUser();
+    }
+
+    @Override
+    public Object apiMyself() {
+        return apiReqres.getApiMyself();
     }
 }

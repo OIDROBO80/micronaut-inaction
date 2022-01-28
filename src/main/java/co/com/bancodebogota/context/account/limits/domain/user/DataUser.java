@@ -6,4 +6,9 @@ import io.micronaut.core.annotation.Introspected;
 public class DataUser {
     public Data data;
     public Support support;
+    public String message;
+
+    public DataUser(String message) {
+        this.message = message;
+    }
 }

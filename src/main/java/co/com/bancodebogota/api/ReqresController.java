@@ -20,6 +20,11 @@ public final class ReqresController {
 
     }
 
+    @Get(value = "users/apimyself")
+    public Object getApiMyself(){
+        return dataReqres.myselfApi();
+    }
+
     @Get(value="users/{iduser}")
     public DataUser GetUser(@PathVariable("iduser") int idUser) {
         return dataReqres.byId(idUser);

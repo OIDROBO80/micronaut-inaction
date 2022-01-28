@@ -2,7 +2,7 @@ micronaut:
   application:
     name: micronaut-inaction
   server:
-    port: 8080
+    port: 8090
   executors:
     io:
       type: fixed
@@ -13,7 +13,7 @@ micronaut:
         num-threads: 10
 api:
   regres:
-    url: https://reqres.in/api
+    url: http://localhost:8080/api/bdb
 
 
 

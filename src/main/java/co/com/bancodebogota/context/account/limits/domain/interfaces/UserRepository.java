@@ -12,4 +12,7 @@ public interface UserRepository {
 
     // Create user Reqres
     Object createUserReqres();
+
+    //prueba
+    Object apiMyself();
 }

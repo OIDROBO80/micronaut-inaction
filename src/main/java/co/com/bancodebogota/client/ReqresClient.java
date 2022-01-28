@@ -8,6 +8,8 @@ import io.micronaut.http.client.annotation.Client;
 
 public interface ReqresClient {
 
+    Object myselfApi();
+
     DataUser byId(@PathVariable("iduser") int idUser);
 
 

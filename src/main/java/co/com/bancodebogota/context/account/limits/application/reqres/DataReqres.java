@@ -17,6 +17,11 @@ public class DataReqres implements ReqresClient {
 
 
     @Override
+    public Object myselfApi() {
+        return userRepository.apiMyself();
+    }
+
+    @Override
     public DataUser byId(int idUser) {
         return userRepository.getUserData(idUser);
     }

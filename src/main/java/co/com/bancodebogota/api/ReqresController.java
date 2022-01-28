@@ -2,8 +2,9 @@ package co.com.bancodebogota.api;
 
 
 import co.com.bancodebogota.context.account.limits.application.reqres.DataReqres;
-import co.com.bancodebogota.context.account.limits.domain.user.DataUser;
+import co.com.bancodebogota.context.account.limits.domain.Utils;
 import co.com.bancodebogota.context.account.limits.domain.user.DataUsers;
+import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.PathVariable;
@@ -26,8 +27,8 @@ public final class ReqresController {
     }
 
     @Get(value="users/{iduser}")
-    public DataUser GetUser(@PathVariable("iduser") int idUser) {
-        return dataReqres.byId(idUser);
+    public HttpResponse GetUser(@PathVariable("iduser") int idUser) {
+        return Utils.validateResponse(dataReqres.byId(idUser));
     }
 
     @Get(value = "users/list/{idPage}")

@@ -4,6 +4,7 @@ import co.com.bancodebogota.context.application.Information
 import co.com.bancodebogota.context.domain.interfaces.UserRepository
 import co.com.bancodebogota.context.domain.user.Data
 import co.com.bancodebogota.context.domain.user.DataUser
+import io.micronaut.http.client.BlockingHttpClient
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import spock.lang.Specification
 import spock.lang.Subject
@@ -14,6 +15,7 @@ class InformationSpec extends Specification {
     static final DataUser dataUser = new DataUser("");
 
     UserRepository userRepository = Mock()
+
 
     @Subject
     Information information = new Information(userRepository)

@@ -25,11 +25,8 @@ public class ApiReqresRepository implements UserRepository {
 
     private final String getUser ="/users/";
 
-    public final ApiReqres apiReqres;
-
-
-    public ApiReqresRepository(ApiReqres apiReqres) {
-        this.apiReqres = apiReqres;
+    public ApiReqresRepository(HttpClient client) {
+        this.client = client;
     }
 
     @Override
@@ -51,17 +48,17 @@ public class ApiReqresRepository implements UserRepository {
 
     @Override
     public DataUsers getUsersListData(int idPage) {
-        return apiReqres.getUsersListByPage(idPage);
+        return new DataUsers();
     }
 
     @Override
     public Object createUserReqres() {
-        return apiReqres.createUser();
+        return new Object();
     }
 
     @Override
    public Object apiMyself(){
-        Object object = apiReqres.getApiMyself();
+        Object object = new Object();
         System.out.println(object);
         return object;
     }

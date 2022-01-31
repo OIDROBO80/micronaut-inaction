@@ -6,6 +6,7 @@ import co.com.bancodebogota.context.domain.user.DataUser;
 import co.com.bancodebogota.context.domain.user.DataUsers;
 import io.micronaut.context.annotation.Value;
 import io.micronaut.http.HttpStatus;
+import io.micronaut.http.client.BlockingHttpClient;
 import io.micronaut.http.client.HttpClient;
 import io.micronaut.http.client.exceptions.HttpClientResponseException;
 import io.micronaut.http.uri.UriBuilder;

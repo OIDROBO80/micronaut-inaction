@@ -3,5 +3,8 @@ micronaut:
     name: demo
   server:
     port: -1
+api:
+  regres:
+    url: http://localhost:8080/probe
 ---
 # Environments deploy cloud ecs service

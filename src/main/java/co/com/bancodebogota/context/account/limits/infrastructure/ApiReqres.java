@@ -10,10 +10,10 @@ import io.micronaut.http.client.annotation.Client;
 public interface ApiReqres {
 
     @Get("users/{iduser}")
-    DataUser getUserData(@PathVariable("iduser") int idUser);
+    DataUser informationUserData(@PathVariable("iduser") int idUser);
 
     @Get("users?page={idPage}")
-    DataUsers getUsersListData(@PathVariable("idPage")int idPage);
+    DataUsers informationUsersListData(@PathVariable("idPage")int idPage);
 
     @Post("users")
     Object createUser();

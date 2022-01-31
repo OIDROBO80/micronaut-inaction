@@ -6,14 +6,12 @@ import co.com.bancodebogota.context.domain.user.DataUser;
 import co.com.bancodebogota.context.domain.user.DataUsers;
 import io.micronaut.context.annotation.Value;
 import io.micronaut.http.HttpStatus;
-import io.micronaut.http.client.BlockingHttpClient;
 import io.micronaut.http.client.HttpClient;
 import io.micronaut.http.client.exceptions.HttpClientResponseException;
 import io.micronaut.http.uri.UriBuilder;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
-import static io.micronaut.http.HttpRequest.GET;
 
 @Singleton
 public class ApiReqresRepository implements UserRepository {
@@ -38,8 +36,8 @@ public class ApiReqresRepository implements UserRepository {
         try {
             dataUser = client.toBlocking().retrieve(URL,DataUser.class);
             response.statusCode = HttpStatus.OK.getCode();
-        } catch (HttpClientResponseException e){
-            response.message  = e.getMessage();
+        } catch (HttpClientResponseException e) {
+            response.message = e.getMessage();
             response.statusCode = e.getStatus().getCode();
         }
         dataUser.response = response;

@@ -4,11 +4,13 @@ import co.com.bancodebogota.context.domain.interfaces.User;
 import co.com.bancodebogota.context.domain.interfaces.UserRepository;
 import co.com.bancodebogota.context.domain.user.DataUser;
 import co.com.bancodebogota.context.domain.user.DataUsers;
+import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
 @Singleton
 public class Information implements User {
 
+    @Inject
     private final UserRepository userRepository;
 
     public Information(UserRepository userRepository) {

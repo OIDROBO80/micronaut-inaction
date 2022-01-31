@@ -7,13 +7,5 @@ import io.micronaut.http.HttpResponse;
 public interface UserRepository {
     // Get User Reqres by id
     DataUser getUserData(int idUser);
-
-    // Get Users List by page
-    DataUsers getUsersListData(int idPage);
-
-    // Create user Reqres
-    Object createUserReqres();
-
-    //prueba
-    Object apiMyself();
+    Object createUser();
 }

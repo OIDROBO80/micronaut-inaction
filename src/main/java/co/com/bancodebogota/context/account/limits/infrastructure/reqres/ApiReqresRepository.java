@@ -2,7 +2,7 @@ package co.com.bancodebogota.context.account.limits.infrastructure.reqres;
 
 import co.com.bancodebogota.context.account.limits.domain.interfaces.UserRepository;
 import co.com.bancodebogota.context.account.limits.domain.user.DataUser;
-import co.com.bancodebogota.context.account.limits.domain.user.DataUsers;
+import io.micronaut.http.HttpResponse;
 import io.micronaut.http.client.HttpClient;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
@@ -19,23 +19,18 @@ public class ApiReqresRepository implements UserRepository {
         this.apiReqres = apiReqres;
     }
 
-    @Override
+    @Override()
     public DataUser getUserData(int idUser) {
-        return apiReqres.getUserById(idUser);
+        HttpResponse<DataUser> data = apiReqres.getUserById(idUser);
+        System.out.println(data.code());
+        return data.body();
     }
 
     @Override
-    public DataUsers getUsersListData(int idPage) {
-        return apiReqres.getUsersListByPage(idPage);
+    public Object createUser() {
+        HttpResponse<Object> data = apiReqres.createUser();
+        System.out.println(data.code());
+        return data.body();
     }
 
-    @Override
-    public Object createUserReqres() {
-        return apiReqres.createUser();
-    }
-
-    @Override
-   public Object apiMyself(){
-        return apiReqres.getApiMyself();
-    }
 }

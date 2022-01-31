@@ -3,6 +3,8 @@ package co.com.bancodebogota.context.infrastructure.reqres
 import co.com.bancodebogota.context.application.Information
 import co.com.bancodebogota.context.domain.interfaces.UserRepository
 import co.com.bancodebogota.context.domain.user.DataUser
+import io.micronaut.context.annotation.Any
+import io.micronaut.context.annotation.Property
 import io.micronaut.http.client.HttpClient
 import io.micronaut.http.client.annotation.Client
 import io.micronaut.test.annotation.MockBean
@@ -12,6 +14,7 @@ import spock.lang.Specification
 import spock.lang.Subject
 
 @MicronautTest
+@Property(name="{api.regres.url}", value = "valueurlapi")
 class ApiReqresRepositorySpec extends Specification{
 
     static final DataUser dataUser = new DataUser("");
@@ -25,7 +28,7 @@ class ApiReqresRepositorySpec extends Specification{
 
     def "should return information user by Id"() {
         given: "An information user"
-        client.toBlocking().retrieve(_ as String,DataUser.class) >> dataUser
+        client.toBlocking().retrieve(_ as String,String) >> dataUser
 
         when: "An get information by Id"
         def result = apiReqresRepository.getUserData(idUser)

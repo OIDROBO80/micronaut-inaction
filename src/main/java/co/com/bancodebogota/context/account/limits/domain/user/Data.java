@@ -1,6 +1,7 @@
 package co.com.bancodebogota.context.account.limits.domain.user;
 
-public class UserDto {
+public class Data {
+    //DATA
     public int id;
     public String email;
     public String first_name;

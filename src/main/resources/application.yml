@@ -2,7 +2,7 @@ micronaut:
   application:
     name: micronaut-inaction
   server:
-    port: -1
+    port: 8090
   executors:
     io:
       type: fixed

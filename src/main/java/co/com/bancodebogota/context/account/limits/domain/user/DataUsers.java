@@ -1,12 +1,16 @@
 package co.com.bancodebogota.context.account.limits.domain.user;
 
+import io.micronaut.core.annotation.Introspected;
+
 import java.util.ArrayList;
 
-public class UsersDto {
+@Introspected
+public class DataUsers extends Data{
+
     public int page;
     public int per_page;
     public int total;
     public int total_pages;
-    public ArrayList<UserDto> data;
+    public ArrayList<Data> data;
     public Support support;
 }

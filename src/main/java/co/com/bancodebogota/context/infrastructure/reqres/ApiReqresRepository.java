@@ -22,7 +22,8 @@ public class ApiReqresRepository implements UserRepository {
     @Value("${api.regres.url}")
     private String apiRegresUrl;
 
-    private final String getUser ="/users/";
+    private final String getUser ="/users";
+
 
     public ApiReqresRepository(HttpClient client) {
         this.client = client;
@@ -32,7 +33,7 @@ public class ApiReqresRepository implements UserRepository {
     public DataUser getUserData(int idUser) {
         DataUser dataUser =  new DataUser("");
         Response response = new Response();
-        String URL = UriBuilder.of(apiRegresUrl+getUser+idUser).toString();
+        String URL = UriBuilder.of(apiRegresUrl+getUser+"/"+idUser).toString();
         try {
             dataUser = client.toBlocking().retrieve(URL,DataUser.class);
             response.statusCode = HttpStatus.OK.getCode();
@@ -47,18 +48,24 @@ public class ApiReqresRepository implements UserRepository {
 
     @Override
     public DataUsers getUsersListData(int idPage) {
-        return new DataUsers();
+        DataUsers dataUsers =  new DataUsers();
+        Response response = new Response();
+        String URL = UriBuilder.of(apiRegresUrl+getUser)
+                .queryParam("page",idPage).toString();
+        try {
+            dataUsers = client.toBlocking().retrieve(URL,DataUsers.class);
+            response.statusCode = HttpStatus.OK.getCode();
+        } catch (HttpClientResponseException e) {
+            response.message = e.getMessage();
+            response.statusCode = e.getStatus().getCode();
+        }
+        dataUsers.response = response;
+        return dataUsers;
     }
 
     @Override
-    public Object createUserReqres() {
-        return new Object();
+    public Response createUser() {
+        return new Response();
     }
 
-    @Override
-   public Object apiMyself(){
-        Object object = new Object();
-        System.out.println(object);
-        return object;
-    }
 }

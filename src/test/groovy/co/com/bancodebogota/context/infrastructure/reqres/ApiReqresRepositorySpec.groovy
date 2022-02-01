@@ -36,12 +36,10 @@ import java.util.logging.Handler
 @MicronautTest
 class ApiReqresRepositorySpec extends Specification{
 
-    private DataUser dataUser ;
-    private HttpResponse  httpResponse ;
+    private DataUser dataUser;
+    private HttpResponse  httpResponse;
 
     BlockingHttpClient blockingHttpClient = Stub(BlockingHttpClient.class)
-
-
 
     @Inject
     @Client("/")

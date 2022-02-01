@@ -1,5 +1,6 @@
 package co.com.bancodebogota.context.domain.interfaces;
 
+import co.com.bancodebogota.context.domain.response.Response;
 import co.com.bancodebogota.context.domain.user.DataUser;
 import co.com.bancodebogota.context.domain.user.DataUsers;
 
@@ -11,8 +12,6 @@ public interface UserRepository {
     DataUsers getUsersListData(int idPage);
 
     // Create user Reqres
-    Object createUserReqres();
+    Response createUser();
 
-    //prueba
-    Object apiMyself();
 }

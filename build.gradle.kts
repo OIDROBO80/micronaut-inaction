@@ -29,6 +29,7 @@ dependencies {
     implementation("io.micronaut.reactor:micronaut-reactor-http-client")
     implementation("io.micronaut:micronaut-runtime")
     implementation("javax.annotation:javax.annotation-api")
+    testImplementation("org.mockito:mockito-core")
     runtimeOnly("ch.qos.logback:logback-classic")
     compileOnly("org.graalvm.nativeimage:svm")
     implementation("io.micronaut:micronaut-validation")

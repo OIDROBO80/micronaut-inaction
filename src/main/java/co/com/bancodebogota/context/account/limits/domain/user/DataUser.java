@@ -9,8 +9,10 @@ public class DataUser{
     public Data data;
     public Support support;
     public String message;
+    public int statusCode;
 
-    public DataUser(String message) {
+    public DataUser(String message, int statusCode) {
         this.message = message;
+        this.statusCode = statusCode;
     }
 }

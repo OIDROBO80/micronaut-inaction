@@ -3,4 +3,4 @@ defaultPackage: co.com.bancodebogota
 testFramework: spock
 sourceLanguage: java
 buildTool: gradle_kotlin
-features: [annotation-api, app-name, gradle, http-client, java, java-application, junit, logback, micronaut-build, netty-server, reactor, reactor-http-client, readme, shade, yaml]
+features: [annotation-api, app-name, gradle, http-client, java, java-application, junit, logback, micronaut-build, mockito, netty-server, reactor, reactor-http-client, readme, shade, yaml]

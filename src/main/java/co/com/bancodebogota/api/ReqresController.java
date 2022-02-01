@@ -1,58 +1,40 @@
 package co.com.bancodebogota.api;
 
 
-import co.com.bancodebogota.context.account.limits.domain.interfaces.*;
+import co.com.bancodebogota.context.account.limits.domain.interfaces.User;
+import co.com.bancodebogota.context.account.limits.domain.user.DataUser;
 import io.micronaut.http.HttpResponse;
-
-import io.micronaut.http.annotation.*;
+import io.micronaut.http.annotation.Controller;
+import io.micronaut.http.annotation.Get;
+import io.micronaut.http.annotation.PathVariable;
+import io.micronaut.http.annotation.Post;
 
 @Controller("/api/${api.version:v1}")
 public final class ReqresController {
 
+    private final User user;
 
-    private final UsersFinder usersFinder;
-    private final UsersListFinder usersListFinder;
-    private final UsersCreate usersCreate;
-    private final UsersUpdate usersUpdate;
-    private final UsersDelete usersDelete;
-
-    public ReqresController(UsersFinder usersFinder, UsersListFinder usersListFinder, UsersCreate usersCreate, UsersUpdate usersUpdate, UsersDelete usersDelete) {
-
-        this.usersFinder = usersFinder;
-        this.usersListFinder = usersListFinder;
-        this.usersCreate = usersCreate;
-        this.usersUpdate = usersUpdate;
-        this.usersDelete = usersDelete;
+    public ReqresController(User user) {
+        this.user = user;
     }
+
 
     @Get(value="users/{iduser}")
-    public HttpResponse informationUserData(@PathVariable("iduser") int idUser) {
-
-        return HttpResponse.ok(usersFinder.informationUserData(idUser));
+    public DataUser informationUserData(@PathVariable("iduser") int idUser) {
+        return user.byId(idUser);
     }
 
-    @Get(value = "users/list/{idPage}")
-    public HttpResponse informationUsersListData(@PathVariable("idPage")int idPage){
-        return HttpResponse.ok(usersListFinder.informationUsersListData(idPage));
+    @Get(value = "user/{idUser}")
+    public DataUser informationMockoon(@PathVariable("idUser")int idUser){
+        return user.findById(idUser);
     }
+
 
     @Post(value = "users")
-    public HttpResponse createUser(){
-        return HttpResponse.created(usersCreate.userCreate());
+    public Object createUser(){
+        return user.create();
     }
 
-    @Put("users/{idUser}")
-    public HttpResponse updateUser(@PathVariable("idUser") int idUser){
-
-        return HttpResponse.ok(usersUpdate.updateUser(idUser));
-    }
-
-
-    @Delete("users/{idUser}")
-    public HttpResponse deleteUser(@PathVariable("idUser") int idUser){
-        usersDelete.deleteUser(idUser);
-        return HttpResponse.noContent();
-    }
 
 
 }

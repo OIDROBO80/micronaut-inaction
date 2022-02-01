@@ -23,12 +23,12 @@ public final class ReqresController {
     }
 
     @Get(value="users/{iduser}")
-    public HttpResponse<DataUser> GetUser(@PathVariable("iduser") int idUser) {
+    public HttpResponse<DataUser> getUser(@PathVariable("iduser") int idUser) {
         return Utils.validateDataUser(user.byId(idUser));
     }
 
     @Get(value = "users/list/{idPage}")
-    public HttpResponse<DataUsers>  GetUsersList(@PathVariable("idPage")int idPage){
+    public HttpResponse<DataUsers>  getUsersList(@PathVariable("idPage")int idPage){
         return Utils.validateDataUsers(user.byPage(idPage));
     }
 

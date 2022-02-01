@@ -1,5 +1,6 @@
 package co.com.bancodebogota.context.domain.user;
 
+import co.com.bancodebogota.context.domain.response.Response;
 import io.micronaut.core.annotation.Introspected;
 
 import java.util.ArrayList;
@@ -13,4 +14,5 @@ public class DataUsers extends Data{
     public int total_pages;
     public ArrayList<Data> data;
     public Support support;
+    public Response response = new Response();
 }

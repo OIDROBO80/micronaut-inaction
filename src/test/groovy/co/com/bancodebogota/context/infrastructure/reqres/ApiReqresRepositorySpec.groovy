@@ -37,9 +37,11 @@ import java.util.logging.Handler
 class ApiReqresRepositorySpec extends Specification{
 
     private DataUser dataUser ;
+    private HttpResponse  httpResponse ;
 
     BlockingHttpClient blockingHttpClient = Stub(BlockingHttpClient.class)
-    HttpResponse  httpResponse = Stub(HttpResponse.class)
+
+
 
     @Inject
     @Client("/")
@@ -52,7 +54,6 @@ class ApiReqresRepositorySpec extends Specification{
 
     @Subject
     ApiReqresRepository apiReqresRepository = new ApiReqresRepository(client)
-
 
     @Property(name="api.regres.url", value = "value url api")
     def "should use apiRegresUrl"() {
@@ -82,21 +83,21 @@ class ApiReqresRepositorySpec extends Specification{
     def "should fail information user by Id when fail status code"() {
         given: " a fail response in call a api"
         dataUser = new DataUser("Date Probe")
-        HttpStatus httpStatus = HttpStatus.BAD_REQUEST
+        HttpStatus httpStatus = httpStatusData
         httpResponse = new SimpleHttpResponse();
         httpResponse.body(dataUser);
         httpResponse.status(httpStatus)
         blockingHttpClient.retrieve(_ as String, DataUser.class) >> { throw new HttpClientResponseException(httpStatus.getReason(),httpResponse) }
 
-        when: "a get information by Id is requested"
-        def result = apiReqresRepository.getUserData(idUser)
+        when: "a get information by Id equal 1 is requested"
+        def result = apiReqresRepository.getUserData(1)
 
         then: "The information user is resolve"
         result.response.statusCode == httpStatus.code
         result.response.message == httpStatus.getReason()
 
-        where: "The idUser is any number"
-        idUser << [1]
+        where: "The httpStatus is incorrect"
+        httpStatusData << [HttpStatus.BAD_REQUEST,HttpStatus.CONNECTION_TIMED_OUT]
     }
 }
 

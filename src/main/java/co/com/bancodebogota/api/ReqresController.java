@@ -16,7 +16,7 @@ import jakarta.inject.Inject;
 @Controller("/api/${api.version:v1}")
 public final class ReqresController {
     @Inject
-    private final User user;
+    private User user;
 
     public ReqresController(User user) {
         this.user = user;
@@ -24,7 +24,8 @@ public final class ReqresController {
 
     @Get(value="users/{iduser}")
     public HttpResponse<DataUser> getUser(@PathVariable("iduser") int idUser) {
-        return Utils.validateDataUser(user.byId(idUser));
+        DataUser dataUser = user.byId(idUser);
+        return Utils.validateDataUser(dataUser);
     }
 
     @Get(value = "users/list/{idPage}")

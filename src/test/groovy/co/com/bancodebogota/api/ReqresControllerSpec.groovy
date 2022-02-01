@@ -1,11 +1,8 @@
 package co.com.bancodebogota.api
 
 import co.com.bancodebogota.context.domain.interfaces.User
-import co.com.bancodebogota.context.domain.response.Response
 import co.com.bancodebogota.context.domain.user.Data
 import co.com.bancodebogota.context.domain.user.DataUser
-import co.com.bancodebogota.context.domain.user.Support
-import io.micronaut.http.client.HttpClient
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import jakarta.inject.Inject
 import spock.lang.Specification
@@ -24,7 +21,7 @@ class ReqresControllerSpec extends Specification {
 
     @Inject
     User user = Stub(User.class) {
-        user.byId(_) >> byId()
+        byId(_) >> byId()
     }
 
     @Subject
